@@ -1,11 +1,12 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './Todos.scss';
 import {Card, Button, Checkbox, Col} from 'antd';
 
 let Todos = ({todo, todoList, updateTodos}) => {
 
+	let [taskDone, setTaskDone] = useState(false)
 	let onChange = (e) => {
-		console.log(`checked = ${e.target.checked}`);
+		setTaskDone(e.target.checked)
 	  }
 	  let colGris = {
 		xxl: 6,
@@ -15,6 +16,9 @@ let Todos = ({todo, todoList, updateTodos}) => {
 		ms: 24
 	}
 
+	let taskDoneMark = []
+	if (taskDone)	taskDoneMark.push(<Button type="dashed" shape="circle" icon="check" disabled={true}></Button>)
+
 	let removeTodo = () => {
 		todoList.splice(todoList.indexOf(todo), 1)
 		updateTodos()
@@ -23,7 +27,8 @@ let Todos = ({todo, todoList, updateTodos}) => {
 	return (
 			
 			<Card>
-				<Col {...colGris}>					
+				<Col {...colGris}>
+					{taskDoneMark}					
 					<Checkbox onChange={onChange}>
 						{todo}
 					</Checkbox>
