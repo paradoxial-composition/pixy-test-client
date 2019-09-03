@@ -5,7 +5,7 @@ import { Form, Icon, Input, Button, Checkbox, Col, notification } from 'antd';
 // import history from '../../../history';
 
 // import axios from 'axios';
-// import Loader from '../../Loader';
+import Loader from '../../Loader';
 
 const BASE_URL = 'http://localhost:7000';
 const usersURL = '/users';
