@@ -15,7 +15,7 @@ let Dashboard = () => {
 		setTodos([])
 		todoList.map((item, index) => {
 			let _Todos = []
-			_Todos.push(<Todo key={item} todo={item} todoList={todoList} updateTodos={updateTodos}/>) //todo component here
+			_Todos.push(<Todo key={item} todo={item} todoList={todoList} setTodoList={setTodoList} updateTodos={updateTodos}/>) //todo component here
 			setTodos(_Todos)
 		})
 	}, []);
@@ -35,10 +35,11 @@ let Dashboard = () => {
 		setTodos([])
 		let _Todos = []
 		todoList.map((item, index) => {
-			_Todos.push(<Todo key={item} todo={item} todoList={todoList} updateTodos={updateTodos}/>) //todo component here
+			_Todos.push(<Todo key={item} todo={item} todoList={todoList} setTodoList={setTodoList} updateTodos={updateTodos}/>) //todo component here
 			setTodos(_Todos)
 		})
 	}
+
 
 	let addTodo = () => {
 		if ( currentTodo !== '') {
@@ -66,16 +67,14 @@ let Dashboard = () => {
 	return (
 			<div>
 				<Row>
-					<Col {...colGris}>
+					<Col>
 						<Search placeholder="..." onChange={e => {setSearchValue(e.target.value)}} onSearch={value => setSearchValue(value)} enterButton />
 					</Col>
 				</Row>
 				<Divider />
 				<Row>
-					<Col {...colGris}>
+					<Col style={{display: 'flex'}}>
 						<Input placeholder="Add todo.." allowClear={true} onChange={e => {SetCurrentTodo(e.target.value)}}/>
-					</Col>
-					<Col {...colGris}>
 						<Button type="primary" shape="circle" icon="check" onClick={addTodo}></Button>
 					</Col>
 				</Row>

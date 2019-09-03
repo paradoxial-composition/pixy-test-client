@@ -26,8 +26,8 @@ let _Layout = ({children, history}) => {
 				<Button type="primary" shape="circle" icon="logout" onClick={logout}></Button>
 			</Header>
 			<Row align="middle">
-			<Col {...colGris}>
-				<Card style={{ width: 800}}>
+			<Col style={{ width: '600px', margin: 'auto', textAlign: 'center' }}>
+				<Card>
 					{children}
 				</Card>
 			</Col>
