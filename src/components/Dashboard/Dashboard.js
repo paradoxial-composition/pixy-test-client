@@ -9,12 +9,13 @@ let Dashboard = () => {
 	let [currentTodo, SetCurrentTodo] = useState('')
 	let [Todos, setTodos] = useState([])
 	let [todoList, setTodoList] = useState([])
+	let [searchValue, setSearchValue] = useState('')
 
 	useEffect(() => {
 		setTodos([])
 		todoList.map((item, index) => {
 			let _Todos = []
-			_Todos.push(<Todo key={index} todo={item} todoList={todoList} updateTodos={updateTodos}/>) //todo component here
+			_Todos.push(<Todo key={item} todo={item} todoList={todoList} updateTodos={updateTodos}/>) //todo component here
 			setTodos(_Todos)
 		})
 	}, []);
@@ -34,7 +35,7 @@ let Dashboard = () => {
 		setTodos([])
 		let _Todos = []
 		todoList.map((item, index) => {
-			_Todos.push(<Todo key={index} todo={item} todoList={todoList} updateTodos={updateTodos}/>) //todo component here
+			_Todos.push(<Todo key={item} todo={item} todoList={todoList} updateTodos={updateTodos}/>) //todo component here
 			setTodos(_Todos)
 		})
 	}
@@ -42,7 +43,7 @@ let Dashboard = () => {
 	let addTodo = () => {
 		if ( currentTodo !== '') {
 			todoList.push(currentTodo)
-			console.log(todoList)
+			console.log(Todos)
 			// let _Todos = Todos
 			// _Todos.push(<Todo key={currentTodo} todo={currentTodo} todoList={todoList} updateTodos={updateTodos}/>)
 			// setTodos(_Todos)
@@ -66,7 +67,7 @@ let Dashboard = () => {
 			<div>
 				<Row>
 					<Col {...colGris}>
-						<Search placeholder="..." onSearch={value => console.log(value)} enterButton />
+						<Search placeholder="..." onChange={e => {setSearchValue(e.target.value)}} onSearch={value => setSearchValue(value)} enterButton />
 					</Col>
 				</Row>
 				<Divider />
@@ -80,7 +81,7 @@ let Dashboard = () => {
 				</Row>
 				<Row>
 					<Col>
-						{Todos}
+						{Todos.filter(item => item.key.toLowerCase().includes(searchValue))}
 					</Col>
 				</Row>
 			</div>

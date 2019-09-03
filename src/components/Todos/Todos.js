@@ -21,6 +21,7 @@ let Todos = ({todo, todoList, updateTodos}) => {
 	}
 
 	return (
+			
 			<Card>
 				<Col {...colGris}>					
 					<Checkbox onChange={onChange}>
