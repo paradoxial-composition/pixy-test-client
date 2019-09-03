@@ -3,6 +3,8 @@ import './Dashboard.scss';
 import Todo from '../Todos'
 import { Input, Col, Row, Divider, Button , notification} from 'antd';
 
+import axios from 'axios';
+
 const { Search } = Input;
 
 let Dashboard = () => {
@@ -11,15 +13,66 @@ let Dashboard = () => {
 	let [todoList, setTodoList] = useState([])
 	let [searchValue, setSearchValue] = useState('')
 
+
+	const BASE_URL = 'http://127.0.0.1:3000';
+	const usersURL = '/todo';
+
+	let  updateTaskList = async (e) => {
+		let user = JSON.parse(localStorage.getItem('user')).user
+		console.log(user)
+		let userAndTasks = {
+			_id : user._id,
+			todoList: todoList
+		}
+		console.log(userAndTasks)
+		await axios.post(`${BASE_URL}${usersURL}`, userAndTasks) // req.params.id
+			.then((response) => {
+			console.log(response)
+			})
+			.catch(err => {
+			console.log(err)
+			const args = {
+				message: 'Error.',
+				description:
+					'Could not persist.',
+				duration: 1.5,
+				};
+				notification.open(args);	
+			})
+	}
+	
+	let  readTaskList = async (e) => {
+		let user = JSON.parse(localStorage.getItem('user')).user
+		await axios.get(`${BASE_URL}${usersURL}/${user._id}`) // req.params.id
+			.then((response) => {
+				console.log(response.data.todo.todoList)
+				setTodoList(response.data.todo.todoList)
+				//return response.data.todosList
+			// TODO: Redux Store here
+			})
+			.catch(err => {
+			console.log(err)
+			const args = {
+				message: 'Error.',
+				description:
+					'Could not read task list from database.',
+				duration: 1.5,
+				};
+				notification.open(args);
+		})
+	}
+
+
+
 	useEffect(() => {
 		setTodos([])
+		console.log(readTaskList())
 		todoList.map((item, index) => {
 			let _Todos = []
 			_Todos.push(<Todo key={item} todo={item} todoList={todoList} setTodoList={setTodoList} updateTodos={updateTodos}/>) //todo component here
 			setTodos(_Todos)
 		})
 	}, []);
-
 
 	let colGris = {
 		xxl: 6,
@@ -33,6 +86,7 @@ let Dashboard = () => {
 
 	let updateTodos = () => {
 		setTodos([])
+		updateTaskList();
 		let _Todos = []
 		todoList.map((item, index) => {
 			_Todos.push(<Todo key={item} todo={item} todoList={todoList} setTodoList={setTodoList} updateTodos={updateTodos}/>) //todo component here
