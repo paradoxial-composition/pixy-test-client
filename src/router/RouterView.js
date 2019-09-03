@@ -10,7 +10,7 @@ class RouterView extends Component {
         return (
             <Switch history={history}>
                 <Route  path='/auth' component={RAuthentication} />
-                <Route  path="/" component={RLayout} />
+                <PrivateRoute  path="/" component={RLayout} />
             </Switch>
         );
     }

@@ -1,12 +1,19 @@
 import React, {useState} from 'react';
+import { Redirect } from 'react-router-dom'
 import './Layout.scss';
-import history from '../../history'
+//import history from '../../history'
 import { Layout, Row, Col, Card, Button} from 'antd';
-const { Header, Sider, Content } = Layout;
+const { Header} = Layout;
 
 let _Layout = ({children, history}) => {
-	let [collapsed, setCollapsed] = useState(false);
-	
+
+	let [redirect, setRedirect] = useState(false)
+	let renderRedirect = () => {
+		if (redirect) {
+		  return <Redirect to='/auth' />
+		}
+	  }
+
 	let colGris = {
 		xxl: 6,
 		xl: 6,
@@ -16,14 +23,17 @@ let _Layout = ({children, history}) => {
 	}
 
 	let logout = () => {
-		//history.push('/auth')
+		localStorage.removeItem('user');
+		setRedirect(true)
+		//history.push('/auth');
 	}
 
 	return (
 		<Layout>
+			{renderRedirect()}
 			<Header style={{ background: '#fff', padding: 0, textAlign: 'right'}}>
-				logout
 				<Button type="primary" shape="circle" icon="logout" onClick={logout}></Button>
+				logout
 			</Header>
 			<Row align="middle">
 			<Col style={{ width: '600px', margin: 'auto', textAlign: 'center' }}>

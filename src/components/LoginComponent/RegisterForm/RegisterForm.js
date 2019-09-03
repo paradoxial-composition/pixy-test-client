@@ -7,7 +7,7 @@ import axios from 'axios';
 import Loader from '../../Loader';
 
 const BASE_URL = 'http://127.0.0.1:3000';
-const usersURL = '/user';
+const usersURL = '/users';
 
 let RegisterForm = ({form, history}) => {
 	let  handleSubmit = async (e) => {
