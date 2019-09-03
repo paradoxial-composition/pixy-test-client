@@ -2,12 +2,12 @@ import React, {useState} from 'react';
 import './LoginForm.scss';
 import { Link } from 'react-router-dom';
 import { Form, Icon, Input, Button, Checkbox, Col, notification } from 'antd';
-// import history from '../../../history';
+import history from '../../../history';
 
-// import axios from 'axios';
+import axios from 'axios';
 import Loader from '../../Loader';
 
-const BASE_URL = 'http://localhost:7000';
+const BASE_URL = 'http://127.0.0.1:3000';
 const usersURL = '/users';
 
 
@@ -18,7 +18,28 @@ let LoginForm = ({form, history}) => {
     e.preventDefault();
    await form.validateFields( async (err, values) => {
       if (!err) {
-        
+        await axios.post(`${BASE_URL}${usersURL}/login`, { email: values.email, password: values.password} ) // req.params.id
+          .then((response) => {
+            if ( response.data.user !== null) {
+              localStorage.setItem('user', JSON.stringify(response.data));
+              history.push('/');
+            } else {
+              const args = {
+                message: 'Erreur.',
+                description:
+                  'Wrong Identifications',
+                duration: 1.5,
+              };
+              notification.open(args);
+
+              history.push('/auth');
+
+            }
+            // TODO: Redux Store here
+          })
+          .catch(err => {
+            console.log(err)
+          })
       }
     });
   };

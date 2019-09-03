@@ -1,19 +1,43 @@
 import React from 'react';
 import './RegisterForm.scss';
-import { Form, Icon, Input, Button, Divider, DatePicker, Col, Row} from 'antd';
+import { Form, Icon, Input, Button, Divider, notification, Col, Row} from 'antd';
 
 
-// import axios from 'axios';
+import axios from 'axios';
 import Loader from '../../Loader';
 
-const BASE_URL = 'http://localhost:7000';
-const usersURL = '/users';
+const BASE_URL = 'http://127.0.0.1:3000';
+const usersURL = '/user';
 
 let RegisterForm = ({form, history}) => {
 	let  handleSubmit = async (e) => {
     e.preventDefault();
     form.validateFields( async (err, values) => {
       if (!err) {
+		let user= {
+			email: values.email,
+			password: values.password,
+		  }
+
+		  if ( user.password === values.confirmPassword) {
+			  await axios.post(`${BASE_URL}${usersURL}/register`, user ) // req.params.id
+				.then((response) => {
+				  console.log(response);
+				  history.push('/auth')
+				})
+				.catch(err => {
+				  console.log(err)
+				})
+		  } else {
+			const args = {
+				message: 'Password imbiguity',
+				description:
+					'Please confirm your password.',
+				duration: 1.5,
+			};
+			notification.open(args);
+		  }
+
       }
     });
 	};
@@ -24,7 +48,7 @@ let RegisterForm = ({form, history}) => {
 		<Form onSubmit={handleSubmit} className="register-form">
         <Form.Item>
           {getFieldDecorator('email', {
-            rules: [{ required: true, message: 'Please input your email!' }],
+            rules: [{ required: true, type: 'email', message: 'Please input your email!' }],
           })(
             <Input
               prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}

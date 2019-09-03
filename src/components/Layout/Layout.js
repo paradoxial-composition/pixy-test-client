@@ -1,29 +1,31 @@
 import React, {useState} from 'react';
 import './Layout.scss';
-import { Layout, Drawer} from 'antd';
+import { Layout, Row, Col, Card} from 'antd';
 const { Header, Sider, Content } = Layout;
 
 let _Layout = ({children, history}) => {
 	let [collapsed, setCollapsed] = useState(false);
-	let [visible, setVisible] = useState(false);
-
-	let toggle = () => {
-    setCollapsed(!collapsed);
-	};
 	
+	let colGris = {
+		xxl: 6,
+		xl: 6,
+		lg: 8,
+		md: 8,
+		ms: 24
+	}
+
 	return (
 		<Layout>
-			<Content
-				className="LayoutContent"
-				style={{
-					margin: '24px 16px',
-					padding: 24,
-					background: '#fff',
-					minHeight: 280,
-				}}
-				>
-				{children}
-			</Content>
+			<Header style={{ background: '#fff', padding: 0, textAlign: 'right'}}>
+				<h1>Log out</h1>
+			</Header>
+			<Row align="middle">
+			<Col {...colGris}>
+				<Card style={{ width: 800}}>
+					{children}
+				</Card>
+			</Col>
+		</Row>
 		</Layout>
 		);
 }
