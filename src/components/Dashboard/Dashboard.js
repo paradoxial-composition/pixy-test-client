@@ -62,16 +62,26 @@ let Dashboard = () => {
 		})
 	}
 
+	let updateTodos = () => {
+		setTodos([])
+		//readTaskList();
+		let _Todos = []
+		todoList.map((item, index) => {
+			_Todos.push(<Todo key={item} todo={item} todoList={todoList} setTodoList={setTodoList} updateTodos={updateTodos}/>) //todo component here
+		})
+		setTodos(_Todos)
+	}
 
 
 	useEffect(() => {
-		setTodos([])
-		console.log(readTaskList())
-		todoList.map((item, index) => {
-			let _Todos = []
-			_Todos.push(<Todo key={item} todo={item} todoList={todoList} setTodoList={setTodoList} updateTodos={updateTodos}/>) //todo component here
-			setTodos(_Todos)
-		})
+		// setTodos([])
+		// console.log(readTaskList())
+		// todoList.map((item, index) => {
+		// 	let _Todos = []
+		// 	_Todos.push(<Todo key={item} todo={item} todoList={todoList} setTodoList={setTodoList} updateTodos={updateTodos}/>) //todo component here
+		// 	setTodos(_Todos)
+		// })
+		readTaskList();
 	}, []);
 
 	let colGris = {
@@ -84,15 +94,6 @@ let Dashboard = () => {
 
 	
 
-	let updateTodos = () => {
-		setTodos([])
-		updateTaskList();
-		let _Todos = []
-		todoList.map((item, index) => {
-			_Todos.push(<Todo key={item} todo={item} todoList={todoList} setTodoList={setTodoList} updateTodos={updateTodos}/>) //todo component here
-			setTodos(_Todos)
-		})
-	}
 
 
 	let addTodo = () => {
@@ -103,6 +104,7 @@ let Dashboard = () => {
 			// _Todos.push(<Todo key={currentTodo} todo={currentTodo} todoList={todoList} updateTodos={updateTodos}/>)
 			// setTodos(_Todos)
 
+			updateTaskList()
 			updateTodos()
 		} else {
 			const args = {
