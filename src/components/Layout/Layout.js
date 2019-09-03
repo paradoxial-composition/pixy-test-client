@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import './Layout.scss';
-import { Layout, Row, Col, Card} from 'antd';
+import history from '../../history'
+import { Layout, Row, Col, Card, Button} from 'antd';
 const { Header, Sider, Content } = Layout;
 
 let _Layout = ({children, history}) => {
@@ -14,10 +15,15 @@ let _Layout = ({children, history}) => {
 		ms: 24
 	}
 
+	let logout = () => {
+		//history.push('/auth')
+	}
+
 	return (
 		<Layout>
 			<Header style={{ background: '#fff', padding: 0, textAlign: 'right'}}>
-				<h1>Log out</h1>
+				logout
+				<Button type="primary" shape="circle" icon="logout" onClick={logout}></Button>
 			</Header>
 			<Row align="middle">
 			<Col {...colGris}>

@@ -1,13 +1,10 @@
-import React from 'react';
+import React,{useState} from 'react';
 import Dashboard from './Dashboard';
 
 let DashboardContainer = (props) => {
 	
 
-	let Todos = []
-
 	let methods = {
-		Todos,
 		...props
 	}
 	return (
