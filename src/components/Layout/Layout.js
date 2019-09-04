@@ -29,19 +29,18 @@ let _Layout = ({children, history}) => {
 	}
 
 	return (
-		<Layout>
+		<Layout style={{ backgroundColor: 'white'}}>
 			{renderRedirect()}
 			<Header style={{ background: '#fff', padding: 0, textAlign: 'right'}}>
-				<Button type="primary" shape="circle" icon="logout" onClick={logout}></Button>
-				logout
+				<Button type="primary" shape="circle" icon="logout" onClick={logout}>logout</Button>
 			</Header>
 			<Row align="middle">
-			<Col style={{ width: '600px', margin: 'auto', textAlign: 'center' }}>
-				<Card>
-					{children}
-				</Card>
-			</Col>
-		</Row>
+				<Col style={{ width: '600px', margin: 'auto', textAlign: 'center' }}>
+					<Card>
+						{children}
+					</Card>
+				</Col>
+			</Row>
 		</Layout>
 		);
 }

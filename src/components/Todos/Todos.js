@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import './Todos.scss';
 import {Card, Button, Checkbox, Col, Popover, Input} from 'antd';
 
-let Todos = ({todo, todoList, updateTodos, setTodoList}) => {
+let Todos = ({todo, todoList, updateTodos, setTodoList, updateTaskList}) => {
 
 	let [taskDone, setTaskDone] = useState(false)
 	let [newTaskName, setNewTaskName] = useState('')
@@ -33,13 +33,14 @@ let Todos = ({todo, todoList, updateTodos, setTodoList}) => {
 
 	let removeTodo = () => {
 		todoList.splice(todoList.indexOf(todo), 1)
+		updateTaskList()
 		updateTodos()
 	}
 
 	return (
 			
 			<Card>
-				<Col {...colGris}>
+				<Col style={{width : '200px'}} {...colGris}>
 					{taskDoneMark}	
 					<Checkbox onChange={onChange}>				
 						<Popover
