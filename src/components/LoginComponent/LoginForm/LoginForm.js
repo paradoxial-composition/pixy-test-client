@@ -25,7 +25,7 @@ let LoginForm = ({form, history}) => {
               history.push('/');
             } else {
               const args = {
-                message: 'Erreur.',
+                message: 'Error',
                 description:
                   'Wrong Identifications',
                 duration: 1.5,

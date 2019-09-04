@@ -23,12 +23,12 @@ let Dashboard = ({updateTaskList, updateTodos, Todos, setTodos, todoList, setTod
 			updateTodos()
 		} else {
 			const args = {
-                message: 'Error.',
-                description:
-                  'Please type in a todo task',
-                duration: 1.5,
-              };
-              notification.open(args);
+				message: 'Error.',
+				description:
+					'Please type in a todo task',
+				duration: 1.5,
+			};
+			notification.open(args);
 		}
 	}
 

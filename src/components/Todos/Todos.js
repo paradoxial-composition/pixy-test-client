@@ -12,7 +12,7 @@ let Todos = ({todo, todoList, updateTodos, setTodoList, updateTaskList}) => {
 	  }
 	  let colGris = {
 		xxl: 6,
-		xl: 18,
+		xl: 20,
 		lg: 8,
 		md: 8,
 		ms: 24
@@ -49,32 +49,32 @@ let Todos = ({todo, todoList, updateTodos, setTodoList, updateTaskList}) => {
 
 	return (
 			
-			<Card>
-				<Col style={{textAlign: 'left'}} {...colGris}>
-					{taskDoneMark}
-					<Checkbox onChange={onChange}>				
-						<Popover
-							content={
-								<div>
-								<Input placeholder="..." allowClear={true} onChange={e => {setNewTaskName(e.target.value)}}/>
-								<a onClick={updateTask}>Edit</a>
-								</div>
-							}
-							title="Edit task."
-							trigger="click"
-							visible={editVisible}
-							onVisibleChange={handlePopup}
-						>
-							{todo}
-						</Popover>
-					</Checkbox>
-				</Col>
+		<Card>
+			<Col style={{textAlign: 'left'}} {...colGris}>
+				{taskDoneMark}
+				<Checkbox onChange={onChange}>				
+					<Popover
+						content={
+							<div>
+							<Input placeholder="..." allowClear={true} onChange={e => {setNewTaskName(e.target.value)}}/>
+							<a onClick={updateTask}>Edit</a>
+							</div>
+						}
+						title="Edit task."
+						trigger="click"
+						visible={editVisible}
+						onVisibleChange={handlePopup}
+					>
+						{todo}
+					</Popover>
+				</Checkbox>
+			</Col>
 
-				<Col style={{textAlign: 'right'}}  {...colGris2}>	
-					<Button type="primary" shape="circle" icon="delete" onClick={removeTodo}></Button>
-				</Col>
-			</Card>
-		);
+			<Col style={{textAlign: 'right'}}  {...colGris2}>	
+				<Button type="primary" shape="circle" icon="delete" onClick={removeTodo}></Button>
+			</Col>
+		</Card>
+	);
 }
 
 export default Todos;

@@ -3,10 +3,12 @@ import Dashboard from './Dashboard';
 import Todo from '../Todos'
 import {notification} from 'antd';
 import axios from 'axios';
+import Loader from '../Loader'
 
 let DashboardContainer = (props) => {
 	let [Todos, setTodos] = useState([])
 	let [todoList, setTodoList] = useState([])
+	let [loading, setLoading] = useState(false);
 
 	const BASE_URL = 'http://127.0.0.1:3000';
 	const usersURL = '/todo';
@@ -36,6 +38,7 @@ let DashboardContainer = (props) => {
 	}
 	
 	let  readTaskList = async (e) => {
+		setLoading(true);
 		let user = JSON.parse(localStorage.getItem('user')).user
 		await axios.get(`${BASE_URL}${usersURL}/${user._id}`) // req.params.id
 			.then((response) => {
@@ -56,6 +59,7 @@ let DashboardContainer = (props) => {
 				};
 				notification.open(args);
 		})
+		.finally(() => setLoading(false))
 	}
 
 	let updateTodos = () => {
@@ -105,6 +109,7 @@ let DashboardContainer = (props) => {
 		setTodoList,
 		...props
 	}
+	if (loading === true) return <Loader />
 	return (
 		<Dashboard {...methods} />
 	)
