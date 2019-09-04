@@ -52,7 +52,7 @@ let Todos = ({todo, todoList, updateTodos, setTodoList, updateTaskList}) => {
 
 	return (
 			
-		<Card>
+		<Card style={{width: '100%'}}>
 			<Col style={{textAlign: 'left'}} {...colGris}>
 				<Checkbox onChange={onChange}>				
 					<Popover

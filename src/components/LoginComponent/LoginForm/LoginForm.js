@@ -21,7 +21,7 @@ let LoginForm = ({form, history}) => {
         await axios.post(`${BASE_URL}${usersURL}/login`, { email: values.email, password: values.password} ) // req.params.id
           .then((response) => {
             if ( response.data.user !== null) {
-              localStorage.setItem('user', JSON.stringify(response.data));
+              localStorage.setItem('user', JSON.stringify(response.data)); // dangerous but it ll do just for now ..
               history.push('/');
             } else {
               const args = {
@@ -35,7 +35,6 @@ let LoginForm = ({form, history}) => {
               history.push('/auth');
 
             }
-            // TODO: Redux Store here
           })
           .catch(err => {
             console.log(err)
