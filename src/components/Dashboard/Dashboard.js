@@ -1,12 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import './Dashboard.scss';
 import Todo from '../Todos'
-import { Input, Col, Row, Divider, Button , notification} from 'antd';
+import { Input, Col, Row, Divider, Button , notification, Pagination, Empty, List} from 'antd';
 
 
 const { Search } = Input;
 
-let Dashboard = ({updateTaskList, updateTodos, Todos, setTodos, todoList, setTodoList,}) => {
+let Dashboard = ({updateTaskList, updateTodos, Todos, setTodos, todoList, setTodoList, pageNumber, pageSize, setPageNumber, setPageSize, totalPages}) => {
 	let [searchValue, setSearchValue] = useState('')
 	let [currentTodo, SetCurrentTodo] = useState('')
 	
@@ -17,7 +17,6 @@ let Dashboard = ({updateTaskList, updateTodos, Todos, setTodos, todoList, setTod
 	let addTodo = () => {
 		if ( currentTodo !== '') {
 			todoList.push(currentTodo)
-			console.log(Todos)
 
 			updateTaskList()
 			updateTodos()
@@ -48,7 +47,20 @@ let Dashboard = ({updateTaskList, updateTodos, Todos, setTodos, todoList, setTod
 				</Row>
 				<Row>
 					<Col>
-						{Todos.filter(item => item.key.toLowerCase().includes(searchValue))}
+						<List
+							pagination={{
+								onChange: page => {
+									setPageNumber(page)
+								},
+								pageSize: pageSize,
+							}}
+							dataSource={Todos.filter(item => item.props.todo.toLowerCase().includes(searchValue))}
+							renderItem={item => (
+								<List.Item>
+									{item}
+								</List.Item>
+							)}
+						/>
 					</Col>
 				</Row>
 			</div>

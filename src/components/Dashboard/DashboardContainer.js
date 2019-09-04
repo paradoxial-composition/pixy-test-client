@@ -8,14 +8,16 @@ import Loader from '../Loader'
 let DashboardContainer = (props) => {
 	let [Todos, setTodos] = useState([])
 	let [todoList, setTodoList] = useState([])
-	let [loading, setLoading] = useState(false);
+	let [pageNumber, setPageNumber] = useState(1)
+	let [pageSize, setPageSize] = useState(5)
+	let [totalPages, setTotalPages] = useState(1)
+	let [loading, setLoading] = useState(false)
 
 	const BASE_URL = 'http://127.0.0.1:3000';
 	const usersURL = '/todo';
 
 	let  updateTaskList = async (e) => {
 		let user = JSON.parse(localStorage.getItem('user')).user
-		console.log(user)
 		let userAndTasks = {
 			_id : user._id,
 			todoList: todoList
@@ -42,10 +44,7 @@ let DashboardContainer = (props) => {
 		let user = JSON.parse(localStorage.getItem('user')).user
 		await axios.get(`${BASE_URL}${usersURL}/${user._id}`) // req.params.id
 			.then((response) => {
-				console.log(response.data.todo.todoList)
-				//todoList = response.data.todo.todoList
 				setTodoList(response.data.todo.todoList)
-				console.log({todoList})
 				//return response.data.todosList
 			// TODO: Redux Store here
 			})
@@ -74,16 +73,8 @@ let DashboardContainer = (props) => {
 
 
 	useEffect( () => {
-		// setTodos([])
-		// console.log(readTaskList())
-		// todoList.map((item, index) => {
-		// 	let _Todos = []
-		// 	_Todos.push(<Todo key={item} todo={item} todoList={todoList} setTodoList={setTodoList} updateTodos={updateTodos}/>) //todo component here
-		// 	setTodos(_Todos)
-		// })
 		readTaskList();
 		updateTodos();
-		//console.log({todoList})
 	}, []);
 
 	let colGris = {
@@ -101,6 +92,11 @@ let DashboardContainer = (props) => {
 
 
 	let methods = {
+		totalPages,
+		pageNumber,
+		setPageNumber,
+		pageSize,
+		setPageSize,
 		updateTaskList,
 		updateTodos,
 		Todos,
