@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import './Todos.scss';
-import {Card, Button, Checkbox, Col, Popover, Input} from 'antd';
+import {Card, Button, Checkbox, Col, Popover, Input, Typography} from 'antd';
+
+const { Text } = Typography;
 
 let Todos = ({todo, todoList, updateTodos, setTodoList, updateTaskList}) => {
 
@@ -39,7 +41,8 @@ let Todos = ({todo, todoList, updateTodos, setTodoList, updateTaskList}) => {
 	}
  
 	let taskDoneMark = []
-	if (taskDone)	taskDoneMark.push(<Button type="dashed" shape="circle" icon="check" disabled={true}></Button>)
+	if (taskDone)	taskDoneMark.push(<Text delete>{todo}</Text>)
+	else taskDoneMark.push(<Text >{todo}</Text>)
 
 	let removeTodo = () => {
 		todoList.splice(todoList.indexOf(todo), 1)
@@ -51,7 +54,6 @@ let Todos = ({todo, todoList, updateTodos, setTodoList, updateTaskList}) => {
 			
 		<Card>
 			<Col style={{textAlign: 'left'}} {...colGris}>
-				{taskDoneMark}
 				<Checkbox onChange={onChange}>				
 					<Popover
 						content={
@@ -65,7 +67,7 @@ let Todos = ({todo, todoList, updateTodos, setTodoList, updateTaskList}) => {
 						visible={editVisible}
 						onVisibleChange={handlePopup}
 					>
-						{todo}
+						{taskDoneMark}
 					</Popover>
 				</Checkbox>
 			</Col>
