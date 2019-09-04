@@ -12,9 +12,17 @@ let Todos = ({todo, todoList, updateTodos, setTodoList, updateTaskList}) => {
 	  }
 	  let colGris = {
 		xxl: 6,
-		xl: 6,
+		xl: 18,
 		lg: 8,
 		md: 8,
+		ms: 24
+	}
+
+	let colGris2 = {
+		xxl: 6,
+		xl: 4,
+		lg: 4,
+		md: 4,
 		ms: 24
 	}
 
@@ -42,8 +50,8 @@ let Todos = ({todo, todoList, updateTodos, setTodoList, updateTaskList}) => {
 	return (
 			
 			<Card>
-				<Col style={{width : '200px'}} {...colGris}>
-					{taskDoneMark}	
+				<Col style={{textAlign: 'left'}} {...colGris}>
+					{taskDoneMark}
 					<Checkbox onChange={onChange}>				
 						<Popover
 							content={
@@ -62,7 +70,7 @@ let Todos = ({todo, todoList, updateTodos, setTodoList, updateTaskList}) => {
 					</Checkbox>
 				</Col>
 
-				<Col {...colGris}>	
+				<Col style={{textAlign: 'right'}}  {...colGris2}>	
 					<Button type="primary" shape="circle" icon="delete" onClick={removeTodo}></Button>
 				</Col>
 			</Card>
