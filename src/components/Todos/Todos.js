@@ -22,6 +22,8 @@ let Todos = ({todo, todoList, updateTodos, setTodoList, updateTaskList}) => {
 		//let _todoList = todoList
 		todoList[todoList.indexOf(todo)] = newTaskName
 		//setTodoList(_todoList)
+		setEditVisible(!editVisible)
+		updateTodos()
 	}
 
 	let handlePopup = () => {
